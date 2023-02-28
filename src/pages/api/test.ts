@@ -2,6 +2,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import dbConnect from "@/backend/dbConnect";
+import UserModel from "@/backend/models/user";
 // import LocationModel from "@/backend/models/location";
 
 export default async function handler(
@@ -9,16 +10,18 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    console.log({ body: req.body });
+  const { telegramId, telegramUser, location } = req.body;
+
+  try {
     dbConnect();
-
+    console.log("finding user");
     // get or create user
-    // let userDB = await UserModel.findOne({ telegramId: 1150267128 }).exec();
+    let userDB = await UserModel.findOne({ telegramId }).exec();
+    
+    console.log(`User ${userDB.telegramId}:${userDB.telegramUser} created`);
 
-    // let locationDB = await LocationModel.findOne({
-    //   id: "portugal-lisboa",
-    // }).exec();
-
-    res.status(200).json({ locationDB: 1 });
+    res.status(200).json(userDB);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal server error" });
