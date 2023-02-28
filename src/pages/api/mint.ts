@@ -6,7 +6,6 @@ import dbConnect from "@/backend/dbConnect";
 import UserModel from "@/backend/models/user";
 import { createWallet } from "@/backend/crypto/createWallet";
 import LocationModel from "@/backend/models/location";
-import axios from "axios";
 import { generateImage } from "@/backend/ai/image";
 import {
   createLocationToken,
@@ -32,7 +31,7 @@ export default async function handler(
 
   try {
     dbConnect();
-
+    console.log("finding user");
     // get or create user
     let userDB = await UserModel.findOne({ telegramId }).exec();
     if (!userDB) {
