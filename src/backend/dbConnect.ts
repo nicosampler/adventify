@@ -13,7 +13,8 @@ if (!MONGODB_URI) throw new Error("MONGODB_URI not defined");
 // }
 
 async function dbConnect() {
-  await mongoose.connect(`${MONGODB_URI}`);
+  const m = await mongoose.connect(`${MONGODB_URI}`);
+  return m;
 }
 
 export default dbConnect;

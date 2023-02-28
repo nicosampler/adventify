@@ -13,7 +13,8 @@ export default async function handler(
   const { telegramId, telegramUser, location } = req.body;
 
   try {
-    await dbConnect();
+    const mongoose = await dbConnect();
+    console.log(mongoose.modelNames);
     console.log("finding user");
     // get or create user
     let userDB = await UserModel.findOne({ telegramId }).exec();
