@@ -9,8 +9,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  try {
-    console.log({ body: req.body });
+  console.log({ body: req.body });
   const { telegramId, telegramUser, location } = req.body;
 
   try {
@@ -18,7 +17,7 @@ export default async function handler(
     console.log("finding user");
     // get or create user
     let userDB = await UserModel.findOne({ telegramId }).exec();
-    
+
     console.log(`User ${userDB.telegramId}:${userDB.telegramUser} created`);
 
     res.status(200).json(userDB);
