@@ -1,14 +1,21 @@
 import { models, model, Schema } from "mongoose";
 
 interface IUser {
-  id: string;
+  telegramId: number;
+  telegramUser: string;
   privateKey: string;
   mnemonic: string;
   address: string;
+  // tokens: number[];
 }
 
 const UserSchema: Schema = new Schema<IUser>({
-  id: {
+  telegramId: {
+    type: Number,
+    required: true,
+    unique: true,
+  },
+  telegramUser: {
     type: String,
     required: true,
     unique: true,
@@ -16,15 +23,21 @@ const UserSchema: Schema = new Schema<IUser>({
   privateKey: {
     type: String,
     required: true,
+    unique: true,
   },
   mnemonic: {
     type: String,
     required: true,
+    unique: true,
   },
   address: {
     type: String,
     required: true,
+    unique: true,
   },
+  // tokens: {
+  //   type: [Number],
+  // },
 });
 
 const UserModel = models.User || model<IUser>("User", UserSchema);

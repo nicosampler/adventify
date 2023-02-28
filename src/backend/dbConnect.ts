@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const { MONGODB_URI, MONGODB_DB } = process.env;
+mongoose.set("strictQuery", false);
+
+const { MONGODB_URI } = process.env;
 
 if (!MONGODB_URI) throw new Error("MONGODB_URI not defined");
 
