@@ -18,8 +18,6 @@ export default async function handler(
     // get or create user
     let userDB = await UserModel.findOne({ telegramId }).exec();
 
-    console.log(`User ${userDB.telegramId}:${userDB.telegramUser} created`);
-
     res.status(200).json(userDB);
   } catch (error) {
     console.error(error);
